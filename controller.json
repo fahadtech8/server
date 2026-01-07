@@ -1,5 +1,11 @@
 {
-  "license_keys": ["MY-SECURE1", "USER-2-KEY", "FAHAD-786"],
+
+  "license_key": "FAHAD-786",
+
   "title": "TEST TEST",
+
   "message": "testestestetestests"
+
 }
+
+
