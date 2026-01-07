@@ -1,5 +1,9 @@
 {
-  "license_keys": ["FAHAD-786xxxxx", "MY-SECURE1","FAHAD-786", "DEMO-KEY-2024"],
-  "title": "Welcome to test",
-  "message": "your website is hacked"
+  "licenses": {
+    "MY-SECURE": "2026-12-31",
+    "FAHAD-786": "2025-06-01",
+    "DEMO-123": "2025-01-10"
+  },
+  "title": "License Expired",
+  "message": "Aapka license khatam ho gaya hai. Please renew karwaein."
 }
