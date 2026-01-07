@@ -1,58 +1,108 @@
-Wordpress, PHP project, aur Landing Page ke liye complete setup aur steps neeche diye gaye hain. Isme aapke request ke mutabiq Multiple Licenses ka logic bhi add kar diya gaya hai taaki aap ek hi file se saari sites manage kar sakein.
-
-1. GitHub Setup (controller.json)
-Sabse pehle GitHub par apni repository mein controller.json banayein aur usme multiple licenses ka array rakhein.
-
-Format:
-
-
+1. GitHub Configuration (controller.json)
+Sabse pehle GitHub par apni file ko is format mein update karein. Isme har license key ke samne uski expiry date (YYYY-MM-DD) likhein.
 
 JSON
 
 
 {
-  "license_keys": ["MY-SECURE", "FAHAD-786", "WP-KEY-99"],
-  "title": "Invalid License",
-  "message": "Aapka license mismatch detected. Please admin se contact karein."
+  "licenses": {
+    "MY-SECURE": "2026-12-31",
+    "FAHAD-786": "2025-06-01",
+    "WP-KEY-99": "2025-01-15"
+  },
+  "title": "License Alert",
+  "msg_expired": "Aapka license expire ho gaya hai. Please renew karein.",
+  "msg_invalid": "Invalid License! Please admin se contact karein."
 }
 
 
 
+2. Landing Page (HTML/JS)
+Kahan lagayein: HTML file mein </body> tag se theek pehle paste karein.
 
-2. PHP Project Setup (PlayTube ya Core PHP)
-Ise apne PHP project ki sabse main file (jaise index.php) mein sabse upar paste karein.
+HTML
 
-Code:
+
+
+
+<div id="secure_layer" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:9999999; color:white; align-items:center; justify-content:center; text-align:center; font-family:sans-serif;">
+    <div style="padding:40px; background:#000; border:1px solid #444; border-radius:20px; max-width:400px; box-shadow: 0 10px 50px rgba(255,0,0,0.3);">
+        <h1 id="t_header" style="color:#ff3333; margin:0;"></h1>
+        <p id="t_body" style="color:#bbb; margin-top:15px;"></p>
+    </div>
+</div>
+
+<script>
+(function() {
+    const _0x_u = "aHR0cHM6Ly9mYWhhZHRlY2g4LmdpdGh1Yi5pby9zZXJ2ZXIvY29udHJvbGxlci5qc29u";
+    const _0x_lk = "TVktU0VDVVJF"; 
+
+    async function checkTimeLicense() {
+        const layer = document.getElementById('secure_layer');
+        const scene = document.querySelector('.scene');
+        try {
+            const r = await fetch(atob(_0x_u) + '?v=' + Date.now());
+            const d = await r.json();
+            
+            const localKey = atob(_0x_lk);
+            const today = new Date().toISOString().split('T')[0];
+            const expiryDate = d.licenses[localKey];
+
+            const isExpired = expiryDate && today > expiryDate;
+            const isInvalid = !expiryDate;
+
+            if (isInvalid || isExpired) {
+                document.getElementById('t_header').innerText = d.title;
+                document.getElementById('t_body').innerText = isExpired ? d.msg_expired : d.msg_invalid;
+                layer.style.display = 'flex';
+                if(scene) scene.style.display = 'none';
+            } else {
+                layer.style.display = 'none';
+                if(scene) scene.style.display = 'flex';
+            }
+        } catch (e) { console.log("Connection Error"); }
+    }
+    checkTimeLicense();
+    setInterval(checkTimeLicense, 15000); 
+})();
+</script>
+
+
+
+
+
+3. PHP Project / Laravel Project
+Kahan lagayein: Laravel mein public/index.php mein require __DIR__.'/../vendor/autoload.php'; ke theek niche paste karein. Normal PHP mein index.php ke bilkul top par paste karein.
+
+
+
+
+
 
 PHP
 
-
-
-
 <?php
-// --- ENCRYPTED MULTI-LICENSE SECURITY START ---
-function _verify_sys_access() {
-    // 1. GitHub URL (Encrypted)
+// --- ENCRYPTED TIME-BASED SECURITY START ---
+function _verify_sys_with_time() {
     $_u = base64_decode("aHR0cHM6Ly9mYWhhZHRlY2g4LmdpdGh1Yi5pby9zZXJ2ZXIvY29udHJvbGxlci5qc29u");
-    
-    // 2. Local License Key (Encrypted: "MY-SECURE")
     $_k = base64_decode("TVktU0VDVVJF"); 
 
-    $_o = array("http" => array("header" => "User-Agent: PT-Shield\r\n", "timeout" => 7));
+    $_o = array("http" => array("header" => "User-Agent: Security-Shield\r\n", "timeout" => 7));
     $_r = @file_get_contents($_u . '?v=' . time(), false, stream_context_create($_o));
 
     if ($_r === FALSE) {
-        die("<div style='background:#000;color:#fff;height:100vh;display:flex;align-items:center;justify-content:center;font-family:sans-serif;'>
-            <div style='text-align:center;'><h1>Security Check</h1><p>Connecting...</p></div>
-        </div>");
+        die("<div style='background:#000;color:#fff;height:100vh;display:flex;align-items:center;justify-content:center;font-family:sans-serif;'><h1>Security Check Offline</h1></div>");
     }
 
     $_d = json_decode($_r, true);
+    $today = date("Y-m-d");
 
-    // Multi-License Logic
-    if (!isset($_d['license_keys']) || !in_array($_k, $_d['license_keys'])) {
-        $_t = $_d['title'] ?? "Invalid License";
-        $_m = $_d['message'] ?? "License mismatch detected.";
+    $is_valid = isset($_d['licenses'][$_k]);
+    $is_expired = ($is_valid && $today > $_d['licenses'][$_k]);
+
+    if (!$is_valid || $is_expired) {
+        $_t = $_d['title'] ?? "Access Denied";
+        $_m = $is_expired ? ($_d['msg_expired'] ?? "Expired") : ($_d['msg_invalid'] ?? "Invalid");
 
         die("<div style='position:fixed;inset:0;background:rgba(0,0,0,0.98);color:white;display:flex;align-items:center;justify-content:center;text-align:center;font-family:sans-serif;z-index:9999999;'>
             <div style='padding:40px;border-radius:20px;background:#000;border:1px solid #333;box-shadow:0 10px 50px rgba(255,0,0,0.3);max-width:400px;'>
@@ -63,86 +113,46 @@ function _verify_sys_access() {
         </div>");
     }
 }
-_verify_sys_access();
-?>
+_verify_sys_with_time();
+// --- ENCRYPTED SECURITY END ---
 
 
-3. Wordpress Setup
-Ise apne Wordpress Theme ki functions.php file mein sabse niche paste karein.
 
 
-Code:
+
+4. WordPress Project
+Kahan lagayein: Apne WordPress theme ki functions.php file mein sabse niche paste karein.
+
+
+
 
 PHP
 
 <?php
-add_action('init', 'wp_remote_shield_lock');
-function wp_remote_shield_lock() {
-    if (is_admin()) return; // Admin dashboard access rahega
+// --- WORDPRESS REMOTE TIME SECURITY ---
+add_action('init', 'wp_time_license_shield');
+function wp_time_license_shield() {
+    if (is_admin()) return;
 
     $_u = base64_decode("aHR0cHM6Ly9mYWhhZHRlY2g4LmdpdGh1Yi5pby9zZXJ2ZXIvY29udHJvbGxlci5qc29u");
-    $_k = base64_decode("TVktU0VDVVJF"); // Change key per site
+    $_k = base64_decode("TVktU0VDVVJF"); 
 
     $response = wp_remote_get($_u . '?v=' . time());
     if (is_wp_error($response)) return;
 
     $data = json_decode(wp_remote_retrieve_body($response), true);
+    $today = date("Y-m-d");
 
-    if (!isset($data['license_keys']) || !in_array($_k, $data['license_keys'])) {
-        wp_die("<h1 style='color:red;'>".$data['title']."</h1><p>".$data['message']."</p>");
+    $is_valid = isset($data['licenses'][$_k]);
+    $is_expired = ($is_valid && $today > $data['licenses'][$_k]);
+
+    if (!$is_valid || $is_expired) {
+        $msg = $is_expired ? $data['msg_expired'] : $data['msg_invalid'];
+        wp_die("<h1 style='color:red;'>".$data['title']."</h1><p>$msg</p>", "License Check", array('response' => 403));
     }
 }
-4. Landing Page Setup (HTML/JS)
-Ise apne landing page ki file mein </body> se theek pehle paste karein.
-
-Code:
-
-HTML
-
-<div id="secure_layer" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:9999999; color:white; align-items:center; justify-content:center; text-align:center;">
-    <div style="padding:40px; background:#000; border:1px solid #444; border-radius:20px; max-width:400px;">
-        <h1 id="t_header" style="color:#ff3333;"></h1>
-        <p id="t_body" style="color:#bbb;"></p>
-    </div>
-</div>
-
-<script>
-(function() {
-    const _0x_u = "aHR0cHM6Ly9mYWhhZHRlY2g4LmdpdGh1Yi5pby9zZXJ2ZXIvY29udHJvbGxlci5qc29u";
-    const _0x_lk = "TVktU0VDVVJF"; 
-
-    async function checkLicense() {
-        const layer = document.getElementById('secure_layer');
-        const scene = document.querySelector('.scene');
-        try {
-            const r = await fetch(atob(_0x_u) + '?v=' + Date.now());
-            const d = await r.json();
-            const isValid = d.license_keys && d.license_keys.includes(atob(_0x_lk));
-
-            if (!isValid) {
-                document.getElementById('t_header').innerText = d.title;
-                document.getElementById('t_body').innerText = d.message;
-                layer.style.display = 'flex';
-                if(scene) scene.style.display = 'none';
-            } else {
-                layer.style.display = 'none';
-                if(scene) scene.style.display = 'flex';
-            }
-        } catch (e) {
-            console.log("Server error");
-        }
-    }
-    checkLicense();
-    setInterval(checkLicense, 10000); 
-})();
-</script>
 
 
-# Kahan add karna hai (Steps):
-GitHub: controller.json banayein aur Raw link copy karein.
 
-PHP Site: index.php ki Line 2 par code paste karein (theek <?php ke niche).
 
-Wordpress: Theme Editor mein ja kar functions.php ke bilkul end mein add karein.
-
-Landing Page: HTML file ke end mein </body> se theek pehle paste karein.
+Aap ye saare codes ek Notepad file mein save kar sakte hain. Jab bhi aapko license manage karna ho, bas GitHub ki JSON file mein changes karein.
