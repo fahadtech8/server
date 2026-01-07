@@ -1,11 +1,5 @@
 {
-
-  "license_key": "FAHAD-786",
-
+  "license_keys": ["FAHAD-786", "MY-SECURE1", "DEMO-KEY-2024"],
   "title": "TEST TEST",
-
   "message": "testestestetestests"
-
 }
-
-
