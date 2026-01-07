@@ -1,6 +1,5 @@
 {
-  "show_overlay": true,
   "license_key": "MY-SECURE",
-  "title": "Access Denied",
-  "message": "Maintenance chal rahi hai, thodi der baad koshish karein."
+  "title": "Invalid License",
+  "message": "Aapka license key match nahi kar raha. Please admin se contact karein."
 }
