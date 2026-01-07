@@ -13,7 +13,10 @@ JSON
   "msg_expired": "Aapka license expire ho gaya hai. Please renew karein.",
   "msg_invalid": "Invalid License! Please admin se contact karein."
 }
-2. Landing Page (HTML/JS)
+2. Landing Page (HTML/JS)]
+
+
+
 Kahan lagayein: HTML file mein </body> tag se theek pehle paste karein.
 
 HTML
@@ -28,13 +31,18 @@ HTML
 <script>
 (function() {
     const _0x_u = "aHR0cHM6Ly9mYWhhZHRlY2g4LmdpdGh1Yi5pby9zZXJ2ZXIvY29udHJvbGxlci5qc29u";
-    const _0x_lk = "TVktU0VDVVJF"; 
+    const _0x_lk = "TEFORElOR1BBR0U="; 
 
     async function checkTimeLicense() {
         const layer = document.getElementById('secure_layer');
         const scene = document.querySelector('.scene');
+        
         try {
             const r = await fetch(atob(_0x_u) + '?v=' + Date.now());
+            
+            // Agar file delete ho gayi hai (404 error), to error throw karein
+            if (!r.ok) throw new Error("Config missing");
+
             const d = await r.json();
             
             const localKey = atob(_0x_lk);
@@ -45,7 +53,7 @@ HTML
             const isInvalid = !expiryDate;
 
             if (isInvalid || isExpired) {
-                document.getElementById('t_header').innerText = d.title;
+                document.getElementById('t_header').innerText = d.title || "License Alert";
                 document.getElementById('t_body').innerText = isExpired ? d.msg_expired : d.msg_invalid;
                 layer.style.display = 'flex';
                 if(scene) scene.style.display = 'none';
@@ -53,12 +61,21 @@ HTML
                 layer.style.display = 'none';
                 if(scene) scene.style.display = 'flex';
             }
-        } catch (e) { console.log("Connection Error"); }
+        } catch (e) { 
+            // FIXED: Agar config file delete ho jaye ya internet na ho, to website lock rakhein
+            console.log("Security Error: " + e.message);
+            document.getElementById('t_header').innerText = "Security Check Failed";
+            document.getElementById('t_body').innerText = "Server configuration missing or connection error. Please contact admin.";
+            layer.style.display = 'flex';
+            if(scene) scene.style.display = 'none';
+        }
     }
     checkTimeLicense();
     setInterval(checkTimeLicense, 15000); 
 })();
 </script>
+
+
 3. PHP Project / Laravel Project
 Kahan lagayein: Laravel mein public/index.php mein require __DIR__.'/../vendor/autoload.php'; ke theek niche paste karein. Normal PHP mein index.php ke bilkul top par paste karein.
 
