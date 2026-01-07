@@ -2,8 +2,9 @@
   "licenses": {
     "MY-SECURE": "2026-12-31",
     "FAHAD-786": "2025-06-01",
-    "DEMO-123": "2025-01-10"
+    "WP-KEY-99": "2025-01-15"
   },
-  "title": "License Expired",
-  "message": "Aapka license khatam ho gaya hai. Please renew karwaein."
+  "title": "License Alert",
+  "msg_expired": "Aapka license expire ho gaya hai. Please renew karein.",
+  "msg_invalid": "Invalid License! Please admin se contact karein."
 }
