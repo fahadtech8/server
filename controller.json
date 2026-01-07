@@ -1,5 +1,5 @@
 {
-  "show_overlay": false,
+  "show_overlay": true,
   "license_key": "MY-SECURE-KEY-786",
   "title": "Access Denied",
   "message": "Maintenance chal rahi hai, thodi der baad koshish karein."
