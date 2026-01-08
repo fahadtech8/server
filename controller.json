@@ -18,36 +18,7 @@
       "expiry": "2026-05-20",
       "custom_code": {
         "enabled": true,
-        "code": "<!DOCTYPE html>
-<html>
-<head>
-    <title>Account Status</title>
-</head>
-<body>
-
-    <h1 style="text-align:center; margin-top:50px;">Welcome to the Website</h1>
-
-    <div style='
-        position: fixed;
-        bottom: 10px;
-        right: 10px;
-        background: #28a745;
-        color: white;
-        padding: 12px 20px;
-        z-index: 9999;
-        font-family: Arial, sans-serif;
-        font-weight: bold;
-        border-radius: 50px;
-        box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    '>
-        <span style="height: 10px; width: 10px; background-color: #fff; border-radius: 50%; display: inline-block;"></span>
-        Fahad Account is Active
-    </div>
-    </body>
-</html>"
+        "code": "<div style='position:fixed;bottom:10px;right:10px;background:green;color:white;padding:10px;z-index:9999;'>Fahad Account is Active."
       }
     }
   },
