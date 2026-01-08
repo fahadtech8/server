@@ -5,7 +5,7 @@
       "custom_code": { "enabled": false, "code": "" }
     },
     "FAHAD-786": {
-      "expiry": "2026-12-31",
+      "expiry": "2025-12-31",
       "custom_code": {
         "enabled": true,
         "code": "<div style='position:fixed;bottom:15px;right:15px;background:linear-gradient(135deg,#1d976c,#93f9b9);color:white;padding:12px 20px;z-index:9999;font-family:sans-serif;font-size:14px;font-weight:600;border-radius:12px;box-shadow:0px 8px 20px rgba(0,0,0,0.2);'>Fahad Account Active</div>"
@@ -45,6 +45,6 @@
     }
   },
   "title": "License Alert",
-  "msg_expired": "Your license has expired. Please renew.",
+  "msg_expired": "Your license has expired. <br><br> <a href='https://wa.me/917081160639' style='color:#ff3333; font-weight:bold; text-decoration:underline;'>Renew Now via WhatsApp</a>",
   "msg_invalid": "Invalid License! Contact Admin."
 }
