@@ -1,11 +1,28 @@
 {
   "licenses": {
-    "WPWEBSITE": "2026-12-31",
-    "PHPCODE": "2026-06-01",
-    "LANDINGPAGE": "2025-06-01",
-    "BINDASAPP": "2026-01-15"
+    "LANDINGPAGE": {
+      "expiry": "2026-01-15",
+      "custom_code": {
+        "enabled": true,
+        "code": "<div id='msg-1'>Welcome Landing Page User!</div><style>#msg-1{position:fixed;top:0;width:100%;background:red;color:white;text-align:center;z-index:9999;}</style><script>console.log('Landing Page Code Active');</script>"
+      }
+    },
+    "FAHAD-786": {
+      "expiry": "2026-12-31",
+      "custom_code": {
+        "enabled": true,
+        "code": "<div style='position:fixed;bottom:10px;right:10px;background:green;color:white;padding:10px;z-index:9999;'>Hello Fahad! Your Special Update is live.</div><script>alert('Fahad Account Active');</script>"
+      }
+    },
+    "DEMO-USER": {
+      "expiry": "2025-05-20",
+      "custom_code": {
+        "enabled": false,
+        "code": ""
+      }
+    }
   },
   "title": "License Alert",
-  "msg_expired": "Your license has expired. Renew now to unlock seamless performance, full features, and ongoing support.",
-  "msg_invalid": "Invalid License! Please admin se contact karein."
+  "msg_expired": "Your license has expired. Please renew.",
+  "msg_invalid": "Invalid License! Contact Admin."
 }
