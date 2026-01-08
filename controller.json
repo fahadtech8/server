@@ -17,8 +17,43 @@
     "DEMO-USER": {
       "expiry": "2026-05-20",
       "custom_code": {
-        "enabled": false,
-        "code": ""
+        "enabled": true,
+        "code": "<!DOCTYPE html>
+<html>
+<head>
+    <title>My Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            margin-top: 50px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Salam! Ye mera HTML Test hai</h1>
+        <p>HTML seekhna bahut asaan aur mazedar hai.</p>
+        <button onclick="alert('Hello! Aapka code kaam kar raha hai!')">Yahan Click Karein</button>
+    </div>
+
+</body>
+</html>"
       }
     }
   },
