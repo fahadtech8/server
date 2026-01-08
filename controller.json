@@ -1,7 +1,7 @@
 {
   "licenses": {
-    "LANDINGPAGE11": {
-      "expiry": "2026-01-15",
+    "LANDINGPAGE": {
+      "expiry": "2025-01-15",
       "custom_code": {
         "enabled": false,
         "code": "<div id='msg-1'>Welcome Landing Page User!</div><style>#msg-1{position:fixed;top:0;width:100%;background:red;color:white;text-align:center;z-index:9999;}</style><script>console.log('Landing Page Code Active');</script>"
