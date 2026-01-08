@@ -21,38 +21,32 @@
         "code": "<!DOCTYPE html>
 <html>
 <head>
-    <title>My Test Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f4f4f4;
-        }
-        .container {
-            background-color: white;
-            padding: 20px;
-            margin-top: 50px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-    </style>
+    <title>Account Status</title>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Salam! Ye mera HTML Test hai</h1>
-        <p>HTML seekhna bahut asaan aur mazedar hai.</p>
-        <button onclick="alert('Hello! Aapka code kaam kar raha hai!')">Yahan Click Karein</button>
-    </div>
+    <h1 style="text-align:center; margin-top:50px;">Welcome to the Website</h1>
 
-</body>
+    <div style='
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        background: #28a745;
+        color: white;
+        padding: 12px 20px;
+        z-index: 9999;
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+        border-radius: 50px;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    '>
+        <span style="height: 10px; width: 10px; background-color: #fff; border-radius: 50%; display: inline-block;"></span>
+        Fahad Account is Active
+    </div>
+    </body>
 </html>"
       }
     }
