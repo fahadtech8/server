@@ -18,7 +18,62 @@
       "expiry": "2026-05-20",
       "custom_code": {
         "enabled": true,
-        "code": "<div style='position:fixed;bottom:10px;right:10px;background:green;color:white;padding:10px;z-index:9999;'>Fahad Account is Active."
+        "code": "<div style='
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, #1d976c, #93f9b9); /* Stylish Green Gradient */
+    color: white;
+    padding: 12px 20px;
+    z-index: 9999;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 12px;
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: slideIn 0.5s ease-out;
+'>
+    <span style="
+        height: 10px; 
+        width: 10px; 
+        background-color: #fff; 
+        border-radius: 50%; 
+        display: inline-block;
+        animation: pulse 1.5s infinite;
+    "></span>
+
+    <span>Fahad Account is <span style="text-transform: uppercase; letter-spacing: 1px;">Active</span></span>
+
+    <a href="https://yourlink.com" target="_blank" style="
+        margin-left: 10px;
+        background: rgba(255,255,255,0.2);
+        color: white;
+        text-decoration: none;
+        padding: 5px 12px;
+        border-radius: 6px;
+        font-size: 12px;
+        transition: 0.3s;
+        border: 1px solid rgba(255,255,255,0.4);
+    " onmouseover="this.style.background='white'; this.style.color='green'" 
+       onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.color='white'">
+        View Profile
+    </a>
+</div>
+
+<style>
+    @keyframes pulse {
+        0% { transform: scale(0.95); opacity: 0.7; }
+        50% { transform: scale(1.2); opacity: 1; }
+        100% { transform: scale(0.95); opacity: 0.7; }
+    }
+    @keyframes slideIn {
+        from { transform: translateX(100px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+</style>"
       }
     }
   },
