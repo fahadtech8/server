@@ -10,7 +10,7 @@
     "FAHAD-786": {
       "expiry": "2026-12-31",
       "custom_code": {
-        "enabled": false,
+        "enabled": true,
         "code": "<div style='position:fixed;bottom:15px;right:15px;background:linear-gradient(135deg,#1d976c,#93f9b9);color:white;padding:12px 20px;z-index:9999;font-family:sans-serif;font-size:14px;font-weight:600;border-radius:12px;box-shadow:0px 8px 20px rgba(0,0,0,0.2);display:flex;align-items:center;gap:10px;'><span>Fahad Account is Active</span><a href='https://yourlink.com' style='color:white;text-decoration:none;background:rgba(255,255,255,0.2);padding:4px 8px;border-radius:4px;'>Link</a></div>"
       }
     }
