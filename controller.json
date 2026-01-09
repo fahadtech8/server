@@ -1,1 +1,61 @@
-
+{
+  "licenses": {
+    "LANDINGPAGE": {
+      "expiry": "2026-01-15",
+      "authorized_target": ["yourdomain.com"],
+      "custom_code": { "enabled": false, "code": "" }
+    },
+    "FAHAD-786": {
+      "expiry": "2026-12-31",
+      "authorized_target": ["fahadtech8.github.io", "connect.thefahad.in"],
+      "custom_code": {
+        "enabled": false,
+        "code": "<div style='position:fixed;bottom:15px;right:15px;background:linear-gradient(135deg,#1d976c,#93f9b9);color:white;padding:12px 20px;z-index:9999;font-family:sans-serif;font-size:14px;font-weight:600;border-radius:12px;box-shadow:0px 8px 20px rgba(0,0,0,0.2);'>Fahad Account Active</div>"
+      }
+    },
+    "WP-CLIENT-03": {
+      "expiry": "2026-03-10",
+      "authorized_target": ["client3.com"],
+      "custom_code": { "enabled": false, "code": "" }
+    },
+    "TECH-PRO-04": {
+      "expiry": "2026-05-20",
+      "authorized_target": [], 
+      "custom_code": { "enabled": false, "code": "" }
+    },
+    "GURU-DEV-05": {
+      "expiry": "2026-07-15",
+      "authorized_target": ["gurudev.net"],
+      "custom_code": { "enabled": false, "code": "" }
+    },
+    "SMART-WEB-06": {
+      "expiry": "2026-08-01",
+      "authorized_target": ["smartweb.org"],
+      "custom_code": { "enabled": false, "code": "" }
+    },
+    "LUX-SHOP-07": {
+      "expiry": "2026-10-10",
+      "authorized_target": ["luxshop.in"],
+      "custom_code": { "enabled": false, "code": "" }
+    },
+    "PORTFOLIO-08": {
+      "expiry": "2026-12-01",
+      "authorized_target": ["myportfolio.com"],
+      "custom_code": { "enabled": false, "code": "" }
+    },
+    "ECOM-HUB-09": {
+      "expiry": "2027-01-20",
+      "authorized_target": ["ecomhub.pk", "test-store.com"],
+      "custom_code": { "enabled": false, "code": "" }
+    },
+    "MASTER-KEY-10": {
+      "expiry": "2028-12-31",
+      "authorized_target": [],
+      "custom_code": { "enabled": false, "code": "" }
+    }
+  },
+  "title": "License Alert",
+  "msg_expired": "Your license has expired. <br><br> <a href='https://wa.me/917081160639' style='display:inline-block; background:#25D366; color:white; padding:12px 25px; text-decoration:none; border-radius:50px; font-weight:bold; box-shadow:0 4px 15px rgba(37,211,102,0.4);'>Renew Now via WhatsApp</a>",
+  "msg_invalid": "Invalid License! <br> Contact Admin for activation.",
+  "msg_domain_mismatch": "Unauthorized Domain! <br> This license is not registered for this website."
+}
