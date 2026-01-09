@@ -5,8 +5,8 @@
       "authorized_target": ["yourdomain.com"],
       "custom_code": { "enabled": false, "code": "" }
     },
-    "FAHAD-786": {
-      "expiry": "2023-12-31",
+    "FAHAD-7861": {
+      "expiry": "2026-12-31",
       "authorized_target": ["fahadtech8.github.io", "https://fahadtech8.github.io"],
       "custom_code": {
         "enabled": false,
